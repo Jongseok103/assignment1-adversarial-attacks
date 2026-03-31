@@ -48,9 +48,19 @@ def evaluate(model, loader, criterion, device):
     return total_loss / total, correct / total
 
 
-def fit(model, train_loader, test_loader, device, epochs=5, lr=1e-3):
+def fit(model, train_loader, test_loader, device, epochs=50, lr=1e-3):
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    optimizer = torch.optim.SGD(
+        model.parameters(),
+        lr=0.1,
+        momentum=0.9,
+        weight_decay=5e-4
+    )
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(
+        optimizer,
+        milestones=[20, 30, 40],
+        gamma=0.1
+    )
 
     history = {
         "train_loss": [],
@@ -62,6 +72,8 @@ def fit(model, train_loader, test_loader, device, epochs=5, lr=1e-3):
     for epoch in range(1, epochs + 1):
         train_loss, train_acc = train_one_epoch(model, train_loader, optimizer, criterion, device)
         test_loss, test_acc = evaluate(model, test_loader, criterion, device)
+
+        scheduler.step()
 
         history["train_loss"].append(train_loss)
         history["train_acc"].append(train_acc)
