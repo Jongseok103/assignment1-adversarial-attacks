@@ -59,7 +59,7 @@ Run the full pipeline:
 
 
 ```bash
-python test.py'
+python test.py
 ```
 
 This will:
