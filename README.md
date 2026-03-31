@@ -63,13 +63,13 @@ python test.py'
 ```
 
 This will:
-	1.	load or train the MNIST model
-	2.	load or train the CIFAR-10 model
-	3.	evaluate clean accuracy
-	4.	run FGSM and PGD attacks
-	5.	measure attack success rates
-	6.	save adversarial example visualizations
-	7.	save attack success rates as a CSV file
+1. load or train the MNIST model
+2. load or train the CIFAR-10 model
+3. evaluate clean accuracy
+4. run FGSM and PGD attacks
+5. measure attack success rates
+6. save adversarial example visualizations
+7. save attack success rates as a CSV file
 
 ---
 
@@ -87,18 +87,18 @@ See requirements.txt for details.
 ---
 
 ## Notes
-	•	For targeted attacks, the target label is chosen as (y + 1) % 10.
-	•	Attack success rate is measured on 256 test samples.
-	•	Visualization images show:
-		•	original image
-		•	adversarial image
-		•	magnified perturbation
+- For targeted attacks, the target label is chosen as (y + 1) % 10.
+- Attack success rate is measured on 256 test samples.
+- Visualization images show:
+	- original image
+	- adversarial image
+	- magnified perturbation
 
 ---
 
 ## Reproducibility
 
 To improve reproducibility:
-	•	random seeds are fixed
-	•	dependencies are listed in requirements.txt
-	•	the code is separated into modular files
+- random seeds are fixed
+- dependencies are listed in requirements.txt
+- the code is separated into modular files
