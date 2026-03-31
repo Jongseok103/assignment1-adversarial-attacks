@@ -76,23 +76,23 @@ This will:
 ## Requirements
 
 The main dependencies are:
-•	torch
-•	torchvision
-•	numpy
-•	matplotlib
-•	pandas
+- torch
+- torchvision
+- numpy
+- matplotlib
+- pandas
 
 See requirements.txt for details.
 
 ---
 
 ## Notes
-•	For targeted attacks, the target label is chosen as (y + 1) % 10.
-•	Attack success rate is measured on 256 test samples.
-•	Visualization images show:
-	•	original image
-	•	adversarial image
-	•	magnified perturbation
+	•	For targeted attacks, the target label is chosen as (y + 1) % 10.
+	•	Attack success rate is measured on 256 test samples.
+	•	Visualization images show:
+		•	original image
+		•	adversarial image
+		•	magnified perturbation
 
 ---
 
