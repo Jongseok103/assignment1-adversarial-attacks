@@ -62,7 +62,17 @@ def attack_success_rate_untargeted(model, loader, attack_fn, device, eps, max_sa
     return success / total
 
 
-def save_attack_visualization(x, x_adv, pred_clean, pred_adv, filepath, is_grayscale=True, perturb_scale=5.0):
+def save_attack_visualization(
+    x,
+    x_adv,
+    pred_clean,
+    pred_adv,
+    filepath,
+    is_grayscale=True,
+    perturb_scale=5.0,
+    class_names=None,
+    eps=None,
+):
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
     x_cpu = x.detach().cpu()[0]
@@ -80,17 +90,29 @@ def save_attack_visualization(x, x_adv, pred_clean, pred_adv, filepath, is_grays
         img_pert = perturb.permute(1, 2, 0).numpy()
         cmap = None
 
+    if class_names is not None:
+        clean_label_text = class_names[pred_clean]
+        adv_label_text = class_names[pred_adv]
+    else:
+        clean_label_text = str(pred_clean)
+        adv_label_text = str(pred_adv)
+    
+    if eps is not None:
+        eps_text = f"{eps:.4f}"
+    else:
+        eps_text = "N/A"
+
     fig, axes = plt.subplots(1, 3, figsize=(10, 3))
     axes[0].imshow(img_clean, cmap=cmap)
-    axes[0].set_title(f"Original\npred={pred_clean}")
+    axes[0].set_title(f"Original\npred={clean_label_text}")
     axes[0].axis("off")
 
     axes[1].imshow(img_adv, cmap=cmap)
-    axes[1].set_title(f"Adversarial\npred={pred_adv}")
+    axes[1].set_title(f"Adversarial\npred={adv_label_text}\neps={eps_text}")
     axes[1].axis("off")
 
     axes[2].imshow((img_pert * perturb_scale + 0.5).clip(0, 1), cmap=cmap)
-    axes[2].set_title(f"Perturbation x{perturb_scale}")
+    axes[2].set_title(f"Perturbation x{perturb_scale}\neps={eps_text}")
     axes[2].axis("off")
 
     plt.tight_layout()
