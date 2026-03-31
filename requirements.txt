@@ -1,8 +1,8 @@
-h5py
-matplotlib
-pillow
-torch
-torchmetrics
-torchvision
-pandas
-numpy
+h5py==3.11.0
+matplotlib==3.7.5
+numpy==1.24.4
+pandas==2.0.3
+pillow==10.4.0
+torch==2.4.1
+torchmetrics==1.3.1
+torchvision==0.19.1
